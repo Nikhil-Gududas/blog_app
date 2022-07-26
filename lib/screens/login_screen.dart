@@ -1,4 +1,6 @@
+import 'package:blog_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -33,41 +35,48 @@ class LoginScreen extends StatelessWidget {
           const SizedBox(height: 60),
           const Text('Welcome back.', style: TextStyle(fontSize: 45)),
           const SizedBox(height: 50),
-          InkWell(
-              onTap: () {},
-              child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  margin: const EdgeInsets.symmetric(horizontal: 25),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.black)),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Sign in with Google',
-                    style: TextStyle(fontSize: 18),
-                  ))),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: RoundedButton(
+                text: 'Sign in with Google',
+                onTap: () {},
+                icon: SvgPicture.asset('assets/icons/google.svg')),
+          ),
           const SizedBox(
             height: 20,
           ),
-          InkWell(
-              onTap: () {},
-              child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  margin: const EdgeInsets.symmetric(horizontal: 25),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.black)),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Sign in with Email',
-                    style: TextStyle(fontSize: 18),
-                  ))),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: RoundedButton(
+                text: 'Sign in with Google',
+                onTap: () {},
+                icon: Icon(Icons.email_outlined)),
+          ),
           const SizedBox(
             height: 25,
           ),
-          const Text('or Sign in with'),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: Row(
+              children: [
+                Flexible(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 20, right: 05),
+                    color: Colors.black,
+                    height: 1,
+                  ),
+                ),
+                const Text('or, Sign in with'),
+                Flexible(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 05, right: 20),
+                    color: Colors.black,
+                    height: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(height: 25),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

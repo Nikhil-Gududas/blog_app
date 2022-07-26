@@ -14,7 +14,7 @@ class RoundedButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 border: Border.all(color: Colors.black)),
