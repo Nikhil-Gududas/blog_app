@@ -1,0 +1,46 @@
+ // onPressed: () async {
+                      // if (_formKey.currentState!.validate()) {
+                      //   setState(() {
+                      //     showSpinner = true;
+                      //   });
+                      //   try {
+                      //     int date = DateTime.now().microsecondsSinceEpoch;
+                      //     final user = _auth.currentUser;
+                      //     firebase_storage.Reference ref = firebase_storage
+                      //         .FirebaseStorage.instance
+                      //         .ref('/blogapp$date');
+                      //     UploadTask uploadTask =
+                      //         ref.putFile(image!.absolute);
+                      //     await Future.value(uploadTask);
+                      //     var newUrl = await ref.getDownloadURL();
+                      //     postRef
+                      //         .child('Post List')
+                      //         .child(date.toString())
+                      //         .set({
+                      //       'pid': date.toString(),
+                      //       'pImage': newUrl.toString(),
+                      //       'pTime': date.toString(),
+                      //       'pTitle': _titleController.text.toString(),
+                      //       'pDescription':
+                      //           _descriptionController.text.toString(),
+                      //       'uMail': user!.email.toString(),
+                      //       'uId': user.uid.toString(),
+                      //     }).then((value) {
+                      //       toastMessage('Post Published');
+                      //       setState(() {
+                      //         showSpinner = false;
+                      //       });
+                      //     }).catchError((err) {
+                      //       toastMessage(err.toString());
+                      //       setState(() {
+                      //         showSpinner = false;
+                      //       });
+                      //     });
+                      //   } catch (e) {
+                      //     setState(() {
+                      //       showSpinner = false;
+                      //     });
+                      //     toastMessage(e.toString());
+                      //   }
+                      // }
+                      // },
