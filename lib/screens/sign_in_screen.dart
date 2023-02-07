@@ -1,3 +1,4 @@
+import 'package:blog_app/widgets/password_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -20,7 +21,6 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _form = GlobalKey<FormState>();
-  late String email, password;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 Text('Welcome back.',
                     style:
                         MyThemes.headlineLarge.copyWith(color: Colors.white70)),
-                // const SizedBox(height: 20),
                 const Spacer(flex: 1),
                 TextFormField(
                   validator: (text) {
@@ -51,7 +50,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     return null;
                   },
                   controller: _emailController,
-                  onChanged: (value) => email = value,
                   keyboardType: TextInputType.emailAddress,
                   style: const TextStyle(fontSize: 16),
                   decoration: const InputDecoration(
@@ -63,20 +61,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       )),
                 ),
                 const SizedBox(height: 20),
-                TextFormField(
-                  obscureText: true,
-                  style: const TextStyle(fontSize: 16),
-                  decoration: const InputDecoration(
-                      labelText: 'Password',
-                      prefixIcon: Icon(
-                        Icons.lock_rounded,
-                        color: Colors.grey,
-                        size: 25,
-                      )),
-                  controller: _passwordController,
-                  onChanged: (value) => password = value,
-                  validator: (value) =>
-                      value!.isEmpty ? "enter your password" : null,
+                PasswordTextField(
+                  textEditingController: _passwordController,
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 25),
@@ -89,15 +75,15 @@ class _SignInScreenState extends State<SignInScreen> {
                           });
                           try {
                             final user = await _auth.signInWithEmailAndPassword(
-                                email: email.trim(), password: password.trim());
-                            print('success');
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim());
                             setState(() {
                               showSpinner = false;
                             });
                             Navigator.pushReplacementNamed(
                                 context, HomeScreen.routeName);
                           } catch (e) {
-                            var err = e as FirebaseException;
+                            e as FirebaseException;
                             toastMessage(e.message.toString());
                             setState(() {
                               showSpinner = false;

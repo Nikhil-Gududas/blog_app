@@ -24,7 +24,7 @@ class MyThemes {
         ),
       ),
     ),
-    canvasColor: Color(0xff121212),
+    canvasColor: const Color(0xff121212),
     brightness: Brightness.dark,
     textTheme: TextTheme(headline1: headline1, headlineLarge: headlineLarge),
   );

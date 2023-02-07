@@ -22,7 +22,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
-  late String email, password;
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -48,7 +47,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   controller: _email,
                   keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) => email = value,
                   validator: (text) {
                     if (text == null || text.isEmpty) {
                       return 'email can\'t be empty';
@@ -69,7 +67,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: _password,
-                  onChanged: (value) => password = value,
                   obscureText: true,
                   style: const TextStyle(fontSize: 16),
                   validator: (text) {
@@ -91,7 +88,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   validator: (text) {
                     if (text == null || text.isEmpty) {
                       return 'Password can\'t be empty';
-                    } else if (text != password) {
+                    } else if (text != _password.text) {
                       return 'password should be same';
                     } else {
                       return null;
@@ -120,8 +117,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           try {
                             final user =
                                 await _auth.createUserWithEmailAndPassword(
-                                    email: email.trim(),
-                                    password: password.trim());
+                                    email: _email.text.trim(),
+                                    password: _password.text.trim());
                             print('success');
                             print(user);
                             toastMessage('logged in');

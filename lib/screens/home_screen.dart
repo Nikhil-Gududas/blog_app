@@ -1,4 +1,3 @@
-import 'package:blog_app/screens/new_blog_screen.dart';
 import 'package:blog_app/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final pages = [
     const DiscoverScreen(),
-    NewBlogScreen(),
     UserScreen(),
   ];
   var currentIndex = 0;
@@ -35,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'New Blog'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),

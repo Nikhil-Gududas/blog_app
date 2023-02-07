@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:blog_app/constants.dart';
 import 'package:blog_app/crud.dart';
 import 'package:blog_app/screens/home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class NewBlogScreen extends StatefulWidget {
-  NewBlogScreen({super.key});
+  const NewBlogScreen({super.key});
   static const routeName = 'new-blog-screen';
 
   @override
@@ -22,7 +22,7 @@ class NewBlogScreen extends StatefulWidget {
 class _NewBlogScreenState extends State<NewBlogScreen> {
   CrudMethods crudMethods = CrudMethods();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final postRef = FirebaseDatabase.instance.reference().child('Posts');
+  final postRef = FirebaseDatabase.instance.ref().child('Posts');
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
   File? image;
@@ -45,6 +45,7 @@ class _NewBlogScreenState extends State<NewBlogScreen> {
 
   Future getCameraGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
     setState(() {
       if (picker != null) {
         image = File(pickedFile!.path);
@@ -95,16 +96,17 @@ class _NewBlogScreenState extends State<NewBlogScreen> {
         int date = DateTime.now().microsecondsSinceEpoch;
         final user = _auth.currentUser;
         firebase_storage.Reference ref =
-            firebase_storage.FirebaseStorage.instance.ref('/blogapp$date');
+            firebase_storage.FirebaseStorage.instance.ref('/blogapp/$date');
         UploadTask uploadTask = ref.putFile(image!.absolute);
         await Future.value(uploadTask);
         var newUrl = await ref.getDownloadURL();
-        Map<String, String> blogMap = {
+        Map<String, dynamic> blogMap = {
           "imageUrl": newUrl,
           "title": _titleController.text,
           "description": _descriptionController.text,
           'uMail': user!.email.toString(),
           'uId': user.uid.toString(),
+          'createdOn': Timestamp.now()
         };
         crudMethods.addData(blogMap).then((value) {
           Navigator.pushReplacementNamed(context, HomeScreen.routeName);

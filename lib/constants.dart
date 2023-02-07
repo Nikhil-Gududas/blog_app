@@ -38,44 +38,114 @@ void toastMessage(String message) {
 }
 
 Widget buildBlog(BlogModal blog) {
-  return Container(
-    margin: const EdgeInsets.only(bottom: 12),
-    decoration: BoxDecoration(
-      color: Colors.black54,
-      borderRadius: BorderRadius.circular(10),
-    ),
-    width: double.infinity,
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  return GestureDetector(
+    // onTap: () => Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => const BlogDetailScreen(),
+    //     )),
+    child: Container(
+      height: 130,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          border: Border(
+        bottom: BorderSide(color: Colors.grey.shade800, width: 2),
+      )),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CachedNetworkImage(
-            imageUrl: blog.imageUrl,
-            height: 200,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              blog.title.toUpperCase(),
-              style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 12, left: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: const [
+                      CircleAvatar(
+                        backgroundColor: Colors.deepPurple,
+                        radius: 15,
+                        child: Text('N'),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('Nikhil',
+                          style: TextStyle(color: Colors.white, fontSize: 14))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    blog.title,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text('2 Oct . 2 min read',
+                      style: TextStyle(
+                          color: Colors.blueGrey.shade100, fontSize: 14))
+                ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(blog.description),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text("By:  ${blog.uMail}"),
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 18,
+            ),
+            height: 80,
+            width: 80,
+            color: Colors.green,
+            child: CachedNetworkImage(imageUrl: blog.imageUrl),
           )
         ],
       ),
     ),
   );
+  // return Container(
+  //   margin: const EdgeInsets.only(bottom: 12),
+  //   decoration: BoxDecoration(
+  //     color: Colors.black54,
+  //     borderRadius: BorderRadius.circular(10),
+  //   ),
+  //   width: double.infinity,
+  //   child: ClipRRect(
+  //     borderRadius: BorderRadius.circular(10),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         CachedNetworkImage(
+  //           imageUrl: blog.imageUrl,
+  //           height: 200,
+  //           width: double.infinity,
+  //           fit: BoxFit.cover,
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: Text(
+  //             blog.title.toUpperCase(),
+  //             style: TextStyle(
+  //                 fontFamily: 'Poppins',
+  //                 fontSize: 20,
+  //                 fontWeight: FontWeight.bold),
+  //           ),
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: Text(blog.description),
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: Text("By:  ${blog.uMail}"),
+  //         )
+  //       ],
+  //     ),
+  //   ),
+  // );
 }
